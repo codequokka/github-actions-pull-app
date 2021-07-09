@@ -15,7 +15,7 @@ func TestGetHello(t *testing.T) {
 		HelloServer(response, request)
 
 		got := response.Body.String()
-		re := regexp.MustCompile(`^App ver: 1.0.0, Ip: (([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]), Path: /testing$`)
+		re := regexp.MustCompile(`^App ver: 1.0.1, Ip: (([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]), Path: /testing$`)
 
 		if !re.MatchString(got) {
 			t.Errorf("got %q", got)

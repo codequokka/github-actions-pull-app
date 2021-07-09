@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-const APP_VER = "1.0.0"
+const APP_VER = "1.0.1"
 
 // GetIpAddr gets one of the IP address except 127.0.0.1.
 func GetIpAddr() string {
