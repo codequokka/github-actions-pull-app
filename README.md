@@ -1,6 +1,10 @@
 # github-actions-pull-app
 An app repository for demonstrating CI(Github Actions)/CD(ArgoCD).
 
+[![Test and build](https://github.com/codequokka/github-actions-pull-app/actions/workflows/test-build.yml/badge.svg)](https://github.com/codequokka/github-actions-pull-app/actions/workflows/test-build.yml)
+
+[![Docker build and push](https://github.com/codequokka/github-actions-pull-app/actions/workflows/docker-build-publish.yml/badge.svg)](https://github.com/codequokka/github-actions-pull-app/actions/workflows/docker-build-publish.yml)
+
 ## Install ArgoCD
 ```console
 $ kubectl create namespace argocd
@@ -18,13 +22,17 @@ $ echo "https://${k8s_nodeip}:${argocd_port}"
 $ echo "$argocd_admin_password"
 ```
 
+## Create Personal Access Token and set them as Secrets in this repo
+- CR_PAT: a value of repo PAT
+- REPO_ACCERSS_PAT: a value of write:packages PAT
+
 ## Add repository and create new app via ArgoCD WebUI
 TODO: Add repository and create new app via manifests
 
 ## Add a secret for access private container registry
 ```console
-cr_pat='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-repo_owner='xxxxxxxxxx'
+$ cr_pat='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+$ repo_owner='xxxxxxxxxx'
 $ echo $cr_pat | docker login ghcr.io -u $repo_owner --password-stdin
 $ kubectl create namespace hello-go
 $ kubectl create secret generic regcred --from-file=.dockerconfigjson=${HOME}/.docker/config.json --type=kubernetes.io/dockerconfigjson -n hello-go
