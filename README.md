@@ -5,6 +5,20 @@ An app repository for demonstrating CI(Github Actions)/CD(ArgoCD).
 
 [![Docker build and push](https://github.com/codequokka/github-actions-pull-app/actions/workflows/docker-build-publish.yml/badge.svg)](https://github.com/codequokka/github-actions-pull-app/actions/workflows/docker-build-publish.yml)
 
+## Overview
+This repository is demostrating simple CI/CD implementaion.
+  - CI is defined in this context as test and build code, build docker image and push it to container registry with Github Actions. 
+    - Testing and building code is run with [test-build.yml](https://github.com/codequokka/github-actions-pull-app/blob/main/.github/workflows/test-build.yml) Github Actions workflow.
+    - Building docker image and pushing it is also run with [docker-build-publish.yml](https://github.com/codequokka/github-actions-pull-app/blob/main/.github/workflows/docker-build-publish.yml) Github Actionos workflow.
+  - CD is defined in this context as deploy new version app to K8s cluster when it's docker image is pushed with ArgoCD.
+    - When docker image is pushed to container registry, Create pull request to deploy new versoin app to K8s cluster automatically.  
+      This is run with [pull_request.yml](https://github.com/codequokka/github-actions-pull-manifest/blob/main/.github/workflows/pull-request.yml) Github Actionos workflow.
+    - When pull request is merged into main branch, ArgoCD in the K8s cluster deploys new version app to K8s cluster.
+## TODO
+- Introducing Kubeval.
+- Introducing Conftest.
+- Introducing Open Policy Agent/Gatekeeper.
+
 ## Install ArgoCD
 ```console
 $ kubectl create namespace argocd
